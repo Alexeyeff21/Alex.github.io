@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сайт</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            flex-shrink: 0;
+        }
+        
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 22px;
+            outline: none;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3);
+        }
+        
+        .search-button {
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-size: 22px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            min-width: 150px;
+        }
+        
+        .search-button:hover {
+            background-color: #d33426;
+            transform: scale(1.02);
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+            flex-grow: 1;
+        }
+        
+        .portal-button {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--dark-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .portal-button:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .button-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        
+        .button-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .button-desc {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background-color: var(--dark-color);
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .search-box {
+                max-width: 90%;
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: 30px;
+                margin-bottom: 15px;
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+            
+            .search-button {
+                border-radius: 30px;
+                width: 100%;
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .buttons-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .button-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .button-title {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portal-button {
+                padding: 20px 15px;
+            }
+            
+            header {
+                padding: 30px 0;
+            }
+            
+            .logo {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Мой персональный портал</div>
+            <div class="search-container">
+                <form action="https://yandex.ru/search/" method="get" class="search-box">
+                    <input type="text" name="text" class="search-input" placeholder="Поиск в Яндексе..." autocomplete="off">
+                    <button type="submit" class="search-button">Найти</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="buttons-grid">
+            <a href="https://www.ozon.ru/" class="portal-button" target="_blank">
+                <img src="96.png" class="button-icon" alt="Ozon">
+                <div class="button-title">Озон</div>
+                <div class="button-desc">Интернет-магазин</div>
+            </a>
+            
+            <a href="https://dzen.ru/" class="portal-button" target="_blank">
+                <img src="44.png" class="button-icon" alt="Дзен">
+                <div class="button-title">Дзен</div>
+                <div class="button-desc">Новости и статьи</div>
+            </a>
+            
+            <a href="https://www.wildberries.ru/lk/myorders/delivery" class="portal-button" target="_blank">
+                <img src="11.png" class="button-icon" alt="Wildberries">
+                <div class="button-title">Wildberries</div>
+                <div class="button-desc">Онлайн-магазин</div>
+            </a>
+            
+            <a href="https://my.mos.ru/my/#/" class="portal-button" target="_blank">
+                <img src="14.png" class="button-icon" alt="Мос.ру">
+                <div class="button-title">Мос.ру</div>
+                <div class="button-desc">Госуслуги Москвы</div>
+            </a>
+            
+            <a href="index1.html" class="portal-button" target="_blank">
+                <img src="8.png" class="button-icon" alt="Счетчики">
+                <div class="button-title">Счетчики</div>
+                <div class="button-desc">Расчет показаний</div>
+            </a>
+            
+            <a href="https://dzen.ru/pogoda/213" class="portal-button" target="_blank">
+                <img src="2.png" class="button-icon" alt="Погода">
+                <div class="button-title">Погода</div>
+                <div class="button-desc">Прогноз на неделю</div>
+            </a>
+            
+            <a href="https://www.yandex.com" class="portal-button" target="_blank">
+                <img src="6.png" class="button-icon" alt="Яндекс">
+                <div class="button-title">Яндекс</div>
+                <div class="button-desc">поиск</div>
+            </a>
+            
+            <a href="https://yandex.ru/maps/213/moscow/?ll=37.617700%2C55.755863&utm_source=main_stripe_big&z=10" class="portal-button" target="_blank">
+                <img src="5.png" class="button-icon" alt="Я.Карты">
+                <div class="button-title">Я.Карты</div>
+                <div class="button-desc">Карты и навигация</div>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Персональный портал. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
