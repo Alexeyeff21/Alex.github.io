@@ -41,7 +41,7 @@
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 40px 0;
+            padding: 20px 0; /* Уменьшение отступа в заголовке */
             box-shadow: var(--shadow);
             margin-bottom: 30px;
             flex-shrink: 0;
@@ -147,7 +147,7 @@
         
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 15px 0; /* Уменьшение отступа в подвале */
             margin-top: 50px;
             background-color: var(--dark-color);
             color: white;
@@ -185,7 +185,7 @@
             
             .buttons-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
+                gap: 10px; /* Уменьшение промежутка между кнопками */
             }
             
             .button-icon {
@@ -201,6 +201,8 @@
         @media (max-width: 480px) {
             .buttons-grid {
                 grid-template-columns: 1fr;
+            .container {
+                padding: 10px; /* Уменьшение отступа для небольших экранов */
             }
             
             .portal-button {
@@ -248,9 +250,9 @@
             </div>
         </div>
     </header>
-    <div style="display: flex; justify-content: center; align-items: center; height: 5vh; flex-wrap: wrap; padding: 10px;">
-    <div id="clock" style="font-size: 2rem; color: #00FF00; margin: 5px;"></div>
-    <div id="date" style="font-size: 2rem; color: blue; margin: 5px;"></div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 10vh; margin: 20px 0;">
+    <div id="clock" style="font-size: 30px; color: #00FF00; margin-right: 10px;"></div>
+    <div id="date" style="font-size: 30px; color: blue;"></div>
 </div>
 
 <style>
