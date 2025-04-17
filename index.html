@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="images/99.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="images/99.png" sizes="32x32" type="image/png">
     <title>Мой сайт</title>
     <style>
         :root {
@@ -41,9 +41,9 @@
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 20px 0; /* Уменьшение отступа в заголовке */
+            padding: 20px 0;
             box-shadow: var(--shadow);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-shrink: 0;
         }
         
@@ -100,7 +100,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            margin-top: 40px;
+            margin-top: 30px;
             flex-grow: 1;
         }
         
@@ -147,8 +147,8 @@
         
         footer {
             text-align: center;
-            padding: 15px 0; /* Уменьшение отступа в подвале */
-            margin-top: 50px;
+            padding: 15px 0;
+            margin-top: 30px;
             background-color: var(--dark-color);
             color: white;
             flex-shrink: 0;
@@ -156,11 +156,32 @@
         
         .logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 28px;
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .time-date-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0 20px;
+            padding: 10px;
+            width: 100%;
+        }
+        
+        #clock {
+            font-size: 24px;
+            color: #00FF00;
+            margin: 5px 0;
+        }
+        
+        #date {
+            font-size: 20px;
+            color: blue;
+            margin: 5px 0;
         }
         
         @media (max-width: 768px) {
@@ -185,7 +206,8 @@
             
             .buttons-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 10px; /* Уменьшение промежутка между кнопками */
+                gap: 15px;
+                margin-top: 20px;
             }
             
             .button-icon {
@@ -196,52 +218,53 @@
             .button-title {
                 font-size: 18px;
             }
-        }
-        
-        @media (max-width: 768px) {
-    #clock {
-        font-size: 20px;  /* Уменьшение шрифта для мобильных */
-    }
-    #date {
-        font-size: 18px;  /* Уменьшение шрифта для мобильных */
-    }
-    .buttons-grid {
-        flex-direction: column; /* Размещение кнопок вертикально */
-        gap: 10px; /* Увеличение отступов между кнопками */
-    }
-
             
             .portal-button {
                 padding: 20px 15px;
             }
             
             header {
-                padding: 30px 0;
+                padding: 15px 0;
             }
             
             .logo {
                 font-size: 24px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
-        /* Медиа-запросы для адаптации под разные размеры экранов */
-    @media screen and (max-width: 768px) {
-        #clock, #date {
-            font-size: 1.5rem; /* Уменьшение размера шрифта для планшетов и телефонов */
+            
+            /* Специфичные стили для времени и даты на мобильных */
+            .time-date-container {
+                margin: 5px 0 15px;
+            }
+            
+            #clock {
+                font-size: 20px;
+            }
+            
+            #date {
+                font-size: 16px;
+            }
         }
-        div {
-            height: 10vh; /* Увеличение высоты контейнера для мобильных устройств */
+        
+        @media (max-width: 480px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            #clock {
+                font-size: 18px;
+            }
+            
+            #date {
+                font-size: 14px;
+            }
+            
+            .time-date-container {
+                margin: 5px 0 10px;
+            }
         }
-    }
-
-    @media screen and (max-width: 480px) {
-        #clock, #date {
-            font-size: 1rem; /* Дополнительное уменьшение размера шрифта для мобильных устройств */
-        }
-        div {
-            height: 15vh; /* Увеличение высоты контейнера для очень маленьких экранов */
-        }
-    }
-</style>
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -256,63 +279,12 @@
             </div>
         </div>
     </header>
-    <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
-    <div id="clock" style="font-size: 24px; color: #00FF00; margin: 5px;"></div>
-    <div id="date" style="font-size: 20px; color: blue; margin: 5px;"></div>
-</div>
-<style>
-    /* Медиа-запросы для адаптации под разные размеры экранов */
-    @media screen and (max-width: 768px) {
-        #clock, #date {
-            font-size: 1.5rem; /* Уменьшение размера шрифта для планшетов и телефонов */
-        }
-        div {
-            height: 10vh; /* Увеличение высоты контейнера для мобильных устройств */
-        }
-    }
-
-    @media screen and (max-width: 480px) {
-        #clock, #date {
-            font-size: 1rem; /* Дополнительное уменьшение размера шрифта для мобильных устройств */
-        }
-        div {
-            height: 15vh; /* Увеличение высоты контейнера для очень маленьких экранов */
-        }
-    }
-</style>
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-
-            const clockElement = document.getElementById('clock');
-            clockElement.style.color = '#' + Math.floor(Math.random() * 16777215).toString(25); // Меняет цвет на случайный каждый раз
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
-        }
-        function updateDate() {
-            const now = new Date();
-            const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-            const months = [
-                'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
-                'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
-            ];
-            const day = now.getDate();
-            const month = months[now.getMonth()];
-            const dayOfWeek = daysOfWeek[now.getDay()];
-            document.getElementById('date').textContent = `${dayOfWeek}, ${day} ${month}`;
-        }
-
-        function updateTimeAndDate() {
-            updateClock();
-            updateDate();
-        }
-
-        updateTimeAndDate(); // Обновляем часы и дату сразу
-        setInterval(updateClock, 1000); // Обновляем часы каждую секунду
-        setInterval(updateDate, 60000); // Обновляем дату каждую минуту
-    </script>
+    
+    <div class="time-date-container">
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+    
     <div class="container">
         <div class="buttons-grid">
             <a href="https://www.auchan.ru/catalog/?promocode=APRL15_15_3500_1_600&utm_medium=cpc&utm_source=yandex&utm_campaign=im_msk_network_cpc_brand_auchan%7C116967566&utm_content=cid%7C116967566%7Crid%7C53996509298%7Cgid%7C5525235843%7Caid%7C16736945520%7Cpos%7C0%7Cpost%7Cnone%7Csrc%7Cdzen.ru%7Csrct%7Ccontext%7Ctitle=vesna_ryba_1%7C&utm_term=---autotargeting%7Cpid%7C53996509298&yclid=7098947072039845887&utm_referrer=https%3A%2F%2Fdzen.ru%2F" class="portal-button" target="_blank">
@@ -320,8 +292,6 @@
                 <div class="button-title">АШАН</div>
                 <div class="button-desc">магазин</div>
             </a>
-
-            
             
             <a href="https://www.ozon.ru/" class="portal-button" target="_blank">
                 <img src="images/96.png" class="button-icon" alt="Ozon">
@@ -369,6 +339,46 @@
     
     <footer>
         <div class="container">
+            <p>© 2025 Персональный портал. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const clockElement = document.getElementById('clock');
+            clockElement.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Исправлено с 25 на 16 для корректного HEX
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+        
+        function updateDate() {
+            const now = new Date();
+            const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+            const months = [
+                'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
+                'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+            ];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const dayOfWeek = daysOfWeek[now.getDay()];
+            document.getElementById('date').textContent = `${dayOfWeek}, ${day} ${month}`;
+        }
+
+        function updateTimeAndDate() {
+            updateClock();
+            updateDate();
+        }
+
+        updateTimeAndDate();
+        setInterval(updateClock, 1000);
+        setInterval(updateDate, 60000);
+    </script>
+</body>
+</html>
             <p>© 2025 Персональный портал. Все права защищены.</p>
         </div>
     </footer>
