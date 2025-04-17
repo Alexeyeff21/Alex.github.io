@@ -231,7 +231,43 @@
             </div>
         </div>
     </header>
-    
+    <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+    <div id="clock" style="font-size: 30px; color: #00FF00;"></div>
+    <div id="date"style="font-size: 30px; color: blue; clear:left; margin:10px;"></div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const clockElement = document.getElementById('clock');
+            clockElement.style.color = '#' + Math.floor(Math.random() * 16777215).toString(25); // Меняет цвет на случайный каждый раз
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+        function updateDate() {
+            const now = new Date();
+            const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+            const months = [
+                'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
+                'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+            ];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const dayOfWeek = daysOfWeek[now.getDay()];
+            document.getElementById('date').textContent = `${dayOfWeek}, ${day} ${month}`;
+        }
+
+        function updateTimeAndDate() {
+            updateClock();
+            updateDate();
+        }
+
+        updateTimeAndDate(); // Обновляем часы и дату сразу
+        setInterval(updateClock, 1000); // Обновляем часы каждую секунду
+        setInterval(updateDate, 60000); // Обновляем дату каждую минуту
+    </script>
     <div class="container">
         <div class="buttons-grid">
             <a href="https://www.auchan.ru/catalog/?promocode=APRL15_15_3500_1_600&utm_medium=cpc&utm_source=yandex&utm_campaign=im_msk_network_cpc_brand_auchan%7C116967566&utm_content=cid%7C116967566%7Crid%7C53996509298%7Cgid%7C5525235843%7Caid%7C16736945520%7Cpos%7C0%7Cpost%7Cnone%7Csrc%7Cdzen.ru%7Csrct%7Ccontext%7Ctitle=vesna_ryba_1%7C&utm_term=---autotargeting%7Cpid%7C53996509298&yclid=7098947072039845887&utm_referrer=https%3A%2F%2Fdzen.ru%2F" class="portal-button" target="_blank">
