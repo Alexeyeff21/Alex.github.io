@@ -215,8 +215,25 @@
                 font-size: 24px;
                 margin-bottom: 20px;
             }
+        /* Медиа-запросы для адаптации под разные размеры экранов */
+    @media screen and (max-width: 768px) {
+        #clock, #date {
+            font-size: 1.5rem; /* Уменьшение размера шрифта для планшетов и телефонов */
         }
-    </style>
+        div {
+            height: 10vh; /* Увеличение высоты контейнера для мобильных устройств */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #clock, #date {
+            font-size: 1rem; /* Дополнительное уменьшение размера шрифта для мобильных устройств */
+        }
+        div {
+            height: 15vh; /* Увеличение высоты контейнера для очень маленьких экранов */
+        }
+    }
+</style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -231,10 +248,31 @@
             </div>
         </div>
     </header>
-    <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
-    <div id="clock" style="font-size: 30px; color: #00FF00;"></div>
-    <div id="date"style="font-size: 30px; color: blue; clear:left; margin:10px;"></div>
-    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 5vh; flex-wrap: wrap; padding: 10px;">
+    <div id="clock" style="font-size: 2rem; color: #00FF00; margin: 5px;"></div>
+    <div id="date" style="font-size: 2rem; color: blue; margin: 5px;"></div>
+</div>
+
+<style>
+    /* Медиа-запросы для адаптации под разные размеры экранов */
+    @media screen and (max-width: 768px) {
+        #clock, #date {
+            font-size: 1.5rem; /* Уменьшение размера шрифта для планшетов и телефонов */
+        }
+        div {
+            height: 10vh; /* Увеличение высоты контейнера для мобильных устройств */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #clock, #date {
+            font-size: 1rem; /* Дополнительное уменьшение размера шрифта для мобильных устройств */
+        }
+        div {
+            height: 15vh; /* Увеличение высоты контейнера для очень маленьких экранов */
+        }
+    }
+</style>
     <script>
         function updateClock() {
             const now = new Date();
