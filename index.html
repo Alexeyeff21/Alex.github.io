@@ -198,12 +198,18 @@
             }
         }
         
-        @media (max-width: 480px) {
-            .buttons-grid {
-                grid-template-columns: 1fr;
-            .container {
-                padding: 10px; /* Уменьшение отступа для небольших экранов */
-            }
+        @media (max-width: 768px) {
+    #clock {
+        font-size: 20px;  /* Уменьшение шрифта для мобильных */
+    }
+    #date {
+        font-size: 18px;  /* Уменьшение шрифта для мобильных */
+    }
+    .buttons-grid {
+        flex-direction: column; /* Размещение кнопок вертикально */
+        gap: 10px; /* Увеличение отступов между кнопками */
+    }
+
             
             .portal-button {
                 padding: 20px 15px;
@@ -250,11 +256,10 @@
             </div>
         </div>
     </header>
-    <div style="display: flex; justify-content: center; align-items: center; height: 10vh; margin: 20px 0;">
-    <div id="clock" style="font-size: 30px; color: #00FF00; margin-right: 10px;"></div>
-    <div id="date" style="font-size: 30px; color: blue;"></div>
+    <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+    <div id="clock" style="font-size: 24px; color: #00FF00; margin: 5px;"></div>
+    <div id="date" style="font-size: 20px; color: blue; margin: 5px;"></div>
 </div>
-
 <style>
     /* Медиа-запросы для адаптации под разные размеры экранов */
     @media screen and (max-width: 768px) {
