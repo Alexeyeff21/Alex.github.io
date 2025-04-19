@@ -15,7 +15,7 @@
 			--shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 			}
 
-			/* Светлая тема */
+						/* Светлая тема */
 			body {
 			background-color: white;
 			color: black;
@@ -23,7 +23,7 @@
 
 			/* Темная тема */
 			body.dark-theme {
-			background-color: black;
+			background-color: Teal;
 			color: pink;
 			}
 
@@ -61,19 +61,19 @@
 			}
 
 			.theme-toggle {
-                        position: absolute;
-                        top: 20px;
-                        right: 20px;
-                        padding: 10px 15px;
-                        border: none;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        background-color: var(--light-color);
-                        color: var(--dark-color);
-                        transition: all 0.3s;
-                        font-weight: bold;
-                        white-space: nowrap; /* Добавлено, чтобы текст не переносился */
-                       }
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  transition: all 0.3s;
+  font-weight: bold;
+  white-space: nowrap; /* Добавлено, чтобы текст не переносился */
+}
 
 
 
@@ -146,7 +146,7 @@
 			}
 
 			.portal-button {
-			background-color: white;
+			background-color: Azure;
 			border-radius: 15px;
 			padding: 25px 20px;
 			text-align: center;
@@ -163,7 +163,7 @@
 			}
 
 			.dark-theme .portal-button {
-			background-color: #333;
+			background-color: Peru;
 			color: white;
 			border-color: rgba(255, 255, 255, 0.1);
 			}
@@ -229,12 +229,19 @@
 			margin: 5px 0;
 			}
 
+                        .dark-theme #clock {
+			color: white;
+
 			#date {
 			font-size: 20px;
 			color: Olive;
 			margin: 5px 0;
+                       
 			}
 
+                       .dark-theme #date {
+			color: white;
+			}
 			@media (max-width: 768px) {
 			.search-box {
 			max-width: 90%;
@@ -295,7 +302,7 @@
 			#date {
 			font-size: 16px;
 			}
-			
+			}
 
 			@media (max-width: 480px) {
 			.buttons-grid {
@@ -320,7 +327,6 @@
 			right: 10px;
 			padding: 8px 12px;
 			font-size: 14px;
-			}
 			}
 		</style>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
