@@ -66,6 +66,18 @@
             font-size: 1.8rem;
         }
 
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+
+        .input-column {
+            flex: 1;
+            min-width: 120px;
+        }
+
         .input-group {
             display: flex;
             align-items: center;
@@ -142,6 +154,10 @@
                 align-items: center;
             }
             
+            .input-row {
+                flex-direction: column;
+            }
+            
             .input-group {
                 flex-direction: column;
                 align-items: flex-start;
@@ -183,26 +199,57 @@
     <div class="main-container">
         <div class="container">
             <h1>Калькулятор расхода</h1>
-            <div class="input-group">
-                <h4>свет Т1</h4>
-                <input type="number" id="t1" placeholder="Т1" />
+            
+            <div class="input-row">
+                <div class="input-column">
+                    <h3 style="text-align: center; color: #4682B4;">Текущие показания</h3>
+                    <div class="input-group">
+                        <h4>свет Т1</h4>
+                        <input type="number" id="t1" placeholder="Текущее Т1" />
+                    </div>
+                    <div class="input-group">
+                        <h4>свет Т2</h4>
+                        <input type="number" id="t2" placeholder="Текущее Т2" />
+                    </div>
+                    <div class="input-group">
+                        <h4>свет Т3</h4>
+                        <input type="number" id="t3" placeholder="Текущее Т3" />
+                    </div>
+                    <div class="input-group">
+                        <h4>хол вод</h4>
+                        <input type="number" id="hWater" placeholder="Текущее ХВ" />
+                    </div>
+                    <div class="input-group">
+                        <h4>гор вод</h4>
+                        <input type="number" id="gWater" placeholder="Текущее ГВ" />
+                    </div>
+                </div>
+                
+                <div class="input-column">
+                    <h3 style="text-align: center; color: #4682B4;">Предыдущие показания</h3>
+                    <div class="input-group">
+                        <h4>свет Т1</h4>
+                        <input type="number" id="prev_t1" placeholder="Предыдущее Т1" />
+                    </div>
+                    <div class="input-group">
+                        <h4>свет Т2</h4>
+                        <input type="number" id="prev_t2" placeholder="Предыдущее Т2" />
+                    </div>
+                    <div class="input-group">
+                        <h4>свет Т3</h4>
+                        <input type="number" id="prev_t3" placeholder="Предыдущее Т3" />
+                    </div>
+                    <div class="input-group">
+                        <h4>хол вод</h4>
+                        <input type="number" id="prev_hWater" placeholder="Предыдущее ХВ" />
+                    </div>
+                    <div class="input-group">
+                        <h4>гор вод</h4>
+                        <input type="number" id="prev_gWater" placeholder="Предыдущее ГВ" />
+                    </div>
+                </div>
             </div>
-            <div class="input-group">
-                <h4>свет Т2</h4>
-                <input type="number" id="t2" placeholder="Т2" />
-            </div>
-            <div class="input-group">
-                <h4>свет Т3</h4>
-                <input type="number" id="t3" placeholder="Т3" />
-            </div>
-            <div class="input-group">
-                <h4>хол вод</h4>
-                <input type="number" id="hWater" placeholder="Холодная вода" />
-            </div>
-            <div class="input-group">
-                <h4>гор вод</h4>
-                <input type="number" id="gWater" placeholder="Горячая вода" />
-            </div>
+            
             <button id="calculate">Рассчитать</button>
             <button id="reset-data">Сбросить данные</button>
         </div>
@@ -214,35 +261,24 @@
     </div>
 
     <script>
-        const previousValues = JSON.parse(localStorage.getItem('previousValues')) || {};
-
-        function displayPreviousValues() {
-            const today = new Date();
-            const formattedDate = today.toISOString().split('T')[0];
-
-            if (previousValues[formattedDate]) {
-                const values = previousValues[formattedDate];
-                document.getElementById('t1').value = values.t1 || '';
-                document.getElementById('t2').value = values.t2 || '';
-                document.getElementById('t3').value = values.t3 || '';
-                document.getElementById('hWater').value = values.hWater || '';
-                document.getElementById('gWater').value = values.gWater || '';
-
-                document.getElementById('total-output').innerText = `Дата: ${formattedDate}\nT1: ${values.t1 || 0} кВт\nT2: ${values.t2 || 0} кВт\nT3: ${values.t3 || 0} кВт\nГВ: ${values.hWater || 0} куб.\nХВ: ${values.gWater || 0} куб.`;
-            }
-        }
-
         window.onload = function() {
-            displayPreviousValues();
-
             const calculateButton = document.getElementById('calculate');
             calculateButton.addEventListener('click', function() {
+                // Текущие показания
                 const t1NewValue = parseFloat(document.getElementById('t1').value) || 0;
                 const t2NewValue = parseFloat(document.getElementById('t2').value) || 0;
                 const t3NewValue = parseFloat(document.getElementById('t3').value) || 0;
                 const hWaterNewValue = parseFloat(document.getElementById('hWater').value) || 0;
                 const gWaterNewValue = parseFloat(document.getElementById('gWater').value) || 0;
 
+                // Предыдущие показания
+                const t1PrevValue = parseFloat(document.getElementById('prev_t1').value) || 0;
+                const t2PrevValue = parseFloat(document.getElementById('prev_t2').value) || 0;
+                const t3PrevValue = parseFloat(document.getElementById('prev_t3').value) || 0;
+                const hWaterPrevValue = parseFloat(document.getElementById('prev_hWater').value) || 0;
+                const gWaterPrevValue = parseFloat(document.getElementById('prev_gWater').value) || 0;
+
+                // Тарифы
                 const t1Cost = 10.23;
                 const t2Cost = 3.71;
                 const t3Cost = 7.16;
@@ -250,65 +286,51 @@
                 const gWaterCost = 312.5;
                 const vodootvodCost = 51.62;
 
-                let t1PreviousValue = 0, t2PreviousValue = 0, t3PreviousValue = 0, hWaterPreviousValue = 0, gWaterPreviousValue = 0, vodootvodPreviousValue = 0;
+                // Расчет разницы
+                const t1Difference = t1NewValue - t1PrevValue;
+                const t2Difference = t2NewValue - t2PrevValue;
+                const t3Difference = t3NewValue - t3PrevValue;
+                const hWaterDifference = hWaterNewValue - hWaterPrevValue;
+                const gWaterDifference = gWaterNewValue - gWaterPrevValue;
+                const vodootvodDifference = (hWaterNewValue + gWaterNewValue) - (hWaterPrevValue + gWaterPrevValue);
 
-                const today = new Date();
-                const formattedDate = today.toISOString().split('T')[0];
-                if (previousValues[formattedDate]) {
-                    t1PreviousValue = previousValues[formattedDate].t1 || 0;
-                    t2PreviousValue = previousValues[formattedDate].t2 || 0;
-                    t3PreviousValue = previousValues[formattedDate].t3 || 0;
-                    hWaterPreviousValue = previousValues[formattedDate].hWater || 0;
-                    gWaterPreviousValue = previousValues[formattedDate].gWater || 0;
-                    vodootvodPreviousValue = hWaterPreviousValue + gWaterPreviousValue;
-                }
+                // Расчет сумм
+                const t1Sum = t1Difference * t1Cost;
+                const t2Sum = t2Difference * t2Cost;
+                const t3Sum = t3Difference * t3Cost;
+                const hWaterSum = hWaterDifference * hWaterCost;
+                const gWaterSum = gWaterDifference * gWaterCost;
+                const vodootvodSum = vodootvodDifference * vodootvodCost;
+                const totalSum = t1Sum + t2Sum + t3Sum + hWaterSum + gWaterSum + vodootvodSum;
 
-                const t1Difference = t1NewValue - t1PreviousValue;
-                const t2Difference = t2NewValue - t2PreviousValue;
-                const t3Difference = t3NewValue - t3PreviousValue;
-                const hWaterDifference = hWaterNewValue - hWaterPreviousValue;
-                const gWaterDifference = gWaterNewValue - gWaterPreviousValue;
-                const vodootvodNewValue = hWaterNewValue + gWaterNewValue;
-                const vodootvodDifference = vodootvodNewValue - vodootvodPreviousValue;
-
-                const totalSum = (t1Difference * t1Cost + t2Difference * t2Cost + t3Difference * t3Cost) +
-                                (hWaterDifference * hWaterCost + gWaterDifference * gWaterCost) +
-                                (vodootvodDifference * vodootvodCost);
-
-                // Формирование вывода в нужном формате
-                let output = `Дата: ${formattedDate}\n`;
-                output += `Т1: ${t1Difference.toFixed(2)} кВт, ${ (t1Difference * t1Cost).toFixed(2) } руб\n`;
-                output += `Т2: ${t2Difference.toFixed(2)} кВт, ${ (t2Difference * t2Cost).toFixed(2) } руб\n`;
-                output += `Т3: ${t3Difference.toFixed(2)} кВт, ${ (t3Difference * t3Cost).toFixed(2) } руб\n`;
-                output += `ХВ: ${hWaterDifference.toFixed(2)} куб., ${ (hWaterDifference * hWaterCost).toFixed(2) } руб\n`;
-                output += `ГВ: ${gWaterDifference.toFixed(2)} куб., ${ (gWaterDifference * gWaterCost).toFixed(2) } руб\n`;
-                output += `Водоотвод: ${vodootvodDifference.toFixed(2)} куб., стоимость: ${ (vodootvodDifference * vodootvodCost).toFixed(2)} руб\n`;
-                output += `Итого: ${totalSum.toFixed(2)} руб\n`;
+                // Формирование вывода
+                let output = `Дата: ${new Date().toLocaleDateString()}\n\n`;
+                output += `Электроэнергия:\n`;
+                output += `Т1: ${t1Difference.toFixed(2)} кВт (${t1PrevValue} → ${t1NewValue}) = ${t1Sum.toFixed(2)} руб.\n`;
+                output += `Т2: ${t2Difference.toFixed(2)} кВт (${t2PrevValue} → ${t2NewValue}) = ${t2Sum.toFixed(2)} руб.\n`;
+                output += `Т3: ${t3Difference.toFixed(2)} кВт (${t3PrevValue} → ${t3NewValue}) = ${t3Sum.toFixed(2)} руб.\n\n`;
+                output += `Водоснабжение:\n`;
+                output += `Холодная вода: ${hWaterDifference.toFixed(2)} куб. (${hWaterPrevValue} → ${hWaterNewValue}) = ${hWaterSum.toFixed(2)} руб.\n`;
+                output += `Горячая вода: ${gWaterDifference.toFixed(2)} куб. (${gWaterPrevValue} → ${gWaterNewValue}) = ${gWaterSum.toFixed(2)} руб.\n\n`;
+                output += `Водоотведение: ${vodootvodDifference.toFixed(2)} куб. = ${vodootvodSum.toFixed(2)} руб.\n\n`;
+                output += `Итого к оплате: ${totalSum.toFixed(2)} руб.`;
 
                 document.getElementById('total-output').innerText = output;
-
-                // Сохранение данных в localStorage с учетом даты
-                previousValues[formattedDate] = {
-                    t1: t1NewValue,
-                    t2: t2NewValue,
-                    t3: t3NewValue,
-                    hWater: hWaterNewValue,
-                    gWater: gWaterNewValue,
-                    vodootvod: vodootvodNewValue
-                };
-                localStorage.setItem('previousValues', JSON.stringify(previousValues));
             });
 
             document.getElementById('reset-data').addEventListener('click', function() {
                 if (confirm('Вы действительно хотите сбросить все данные?')) {
-                    localStorage.removeItem('previousValues');
                     document.getElementById('total-output').innerText = '';
                     document.getElementById('t1').value = '';
                     document.getElementById('t2').value = '';
                     document.getElementById('t3').value = '';
                     document.getElementById('hWater').value = '';
                     document.getElementById('gWater').value = '';
-                    alert('Данные успешно сброшены.');
+                    document.getElementById('prev_t1').value = '';
+                    document.getElementById('prev_t2').value = '';
+                    document.getElementById('prev_t3').value = '';
+                    document.getElementById('prev_hWater').value = '';
+                    document.getElementById('prev_gWater').value = '';
                 }
             });
 
