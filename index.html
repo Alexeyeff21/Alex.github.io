@@ -172,6 +172,52 @@
 			     color: #00004d;                           
 			     margin: 2px 0;
 			 }
+			 
+			 /* Стили для голосового управления */
+			 .voice-control {
+			     display: flex;
+			     justify-content: center;
+			     margin: 15px 0;
+			 }
+			 
+			 #voiceButton {
+			     background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+			     border: none;
+			     border-radius: 50px;
+			     padding: 12px 24px;
+			     color: white;
+			     font-size: 16px;
+			     cursor: pointer;
+			     display: flex;
+			     align-items: center;
+			     gap: 8px;
+			     box-shadow: var(--shadow);
+			     transition: all 0.3s;
+			 }
+			 
+			 #voiceButton:hover {
+			     transform: translateY(-2px);
+			     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+			 }
+			 
+			 #voiceButton.listening {
+			     background: linear-gradient(135deg, #ea4335, #d32f2f);
+			     animation: pulse 1.5s infinite;
+			 }
+			 
+			 #voiceResult {
+			     text-align: center;
+			     margin: 10px 0;
+			     min-height: 24px;
+			     color: white;
+			     font-weight: bold;
+			 }
+			 
+			 @keyframes pulse {
+			     0% { transform: scale(1); }
+			     50% { transform: scale(1.05); }
+			     100% { transform: scale(1); }
+			 }
 
 			 @media (max-width: 768px) {
 			     .search-box {
@@ -241,7 +287,6 @@
 			     .time-date-container {
 			         margin: 5px 0 10px;
 			     }
-
                             
 			 }
 		</style>
@@ -249,15 +294,10 @@
 	</head>
 	<body>
 		<header>
-
-                       
-
 			<div class="container">
 		        <div class="time-date-container">
-			<div id="clock"></div>
-			<div id="date"></div>
-		
-
+				<div id="clock"></div>
+				<div id="date"></div>
 			</div>
 		</header>
 
@@ -265,6 +305,14 @@
 			<div id="clock"></div>
 			<div id="date"></div>
 		</div>
+		
+		<!-- Блок голосового управления -->
+		<div class="voice-control">
+			<button id="voiceButton">
+				<i class="fas fa-microphone"></i> Голосовое управление
+			</button>
+		</div>
+		<div id="voiceResult"></div>
 
 		<div class="container">
 			<div class="buttons-grid">
@@ -272,59 +320,55 @@
 					href="https://www.auchan.ru/catalog/?promocode=APRL15_15_3500_1_600&utm_medium=cpc&utm_source=yandex&utm_campaign=im_msk_network_cpc_brand_auchan%7C116967566&utm_content=cid%7C116967566%7Crid%7C53996509298%7Cgid%7C5525235843%7Caid%7C16736945520%7Cpos%7C0%7Cpost%7Cnone%7Csrc%7Cdzen.ru%7Csrct%7Ccontext%7Ctitle=vesna_ryba_1%7C&utm_term=---autotargeting%7Cpid%7C53996509298&yclid=7098947072039845887&utm_referrer=https%3A%2F%2Fdzen.ru%2F"
 					class="portal-button"
 					target="_blank"
+					data-voice-command="ашан, магазин, магазин ашан"
 				>
 					<img src="images/21.png" class="button-icon" alt="Яндекс" />
 					<div class="button-title">АШАН</div>
 					<div class="button-desc">магазин</div>
 				</a>
 
-				<a href="https://www.ozon.ru/" class="portal-button1" target="_blank">
+				<a href="https://www.ozon.ru/" class="portal-button1" target="_blank" data-voice-command="озон, интернет магазин, магазин озона">
 					<img src="images/96.png" class="button-icon" alt="Ozon" />
 					<div class="button-title">Озон</div>
 					<div class="button-desc">Интернет-магазин</div>
 				</a>
 
-				<a href="https://dzen.ru/" class="portal-button" target="_blank">
+				<a href="https://dzen.ru/" class="portal-button" target="_blank" data-voice-command="дэн, дзен, новости, статьи">
 					<img src="images/44.png" class="button-icon" alt="Дзен" />
 					<div class="button-title">Дзен</div>
 					<div class="button-desc">Новости и статьи</div>
 				</a>
 
-				<a href="https://www.wildberries.ru/lk/myorders/delivery" class="portal-button1" target="_blank">
+				<a href="https://www.wildberries.ru/lk/myorders/delivery" class="portal-button1" target="_blank" data-voice-command="вайлдберриз, wildberries, вб">
 					<img src="images/11.png" class="button-icon" alt="Wildberries" />
 					<div class="button-title">Wildberries</div>
 					<div class="button-desc">Онлайн-магазин</div>
 				</a>
 
-				<a href="https://my.mos.ru/my/#/" class="portal-button1" target="_blank">
+				<a href="https://my.mos.ru/my/#/" class="portal-button1" target="_blank" data-voice-command="мос ру, москва, госуслуги">
 					<img src="images/14.png" class="button-icon" alt="Мос.ру" />
 					<div class="button-title">Мос.ру</div>
 					<div class="button-desc">Госуслуги Москвы</div>
 				</a>
 
-				<a href="index1.html" class="portal-button" target="_blank">
+				<a href="index1.html" class="portal-button" target="_blank" data-voice-command="счетчики, показания, расчет">
 					<img src="images/8.png" class="button-icon" alt="Счетчики" />
 					<div class="button-title">Счетчики</div>
 					<div class="button-desc">Расчет показаний</div>
 				</a>
 
-				<a href="https://dzen.ru/pogoda/213" class="portal-button1" target="_blank">
+				<a href="https://dzen.ru/pogoda/213" class="portal-button1" target="_blank" data-voice-command="погода, прогноз, погода на неделю">
 					<img src="images/2.png" class="button-icon" alt="Погода" />
 					<div class="button-title">Погода</div>
 					<div class="button-desc">Прогноз на неделю</div>
 				</a>
 
-				<a href="https://yandex.ru/maps/213/moscow/?ll=37.617700%2C55.755863&utm_source=main_stripe_big&z=10" class="portal-button" target="_blank">
+				<a href="https://yandex.ru/maps/213/moscow/?ll=37.617700%2C55.755863&utm_source=main_stripe_big&z=10" class="portal-button" target="_blank" data-voice-command="карты, навигация, я карты, яндекс карты">
 					<img src="images/5.png" class="button-icon" alt="Я.Карты" />
 					<div class="button-title">Я.Карты</div>
 					<div class="button-desc">Карты и навигация</div>
 				</a>
 			</div>
-
-
-
-
-
 		</div>
 
 		<footer>
@@ -366,9 +410,94 @@
 			updateTimeAndDate();
 			setInterval(updateClock, 1000);
 			setInterval(updateDate, 60000);
+			
+			// Голосовое управление
+			document.addEventListener('DOMContentLoaded', function() {
+			    const voiceButton = document.getElementById('voiceButton');
+			    const voiceResult = document.getElementById('voiceResult');
+			    
+			    // Проверяем поддержку браузером
+			    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+			        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+			        const recognition = new SpeechRecognition();
+			        
+			        recognition.lang = 'ru-RU';
+			        recognition.continuous = false;
+			        recognition.interimResults = false;
+			        
+			        voiceButton.addEventListener('click', function() {
+			            try {
+			                recognition.start();
+			                voiceButton.classList.add('listening');
+			                voiceResult.textContent = 'Слушаю...';
+			            } catch (error) {
+			                console.error('Ошибка при запуске распознавания:', error);
+			                voiceResult.textContent = 'Ошибка: ' + error.message;
+			            }
+			        });
+			        
+			        recognition.onresult = function(event) {
+			            const transcript = event.results[0][0].transcript.trim().toLowerCase();
+			            voiceResult.textContent = `Вы сказали: "${transcript}"`;
+			            console.log('Распознано:', transcript);
+			            
+			            // Ищем подходящую команду
+			            const allIcons = document.querySelectorAll('[data-voice-command]');
+			            let commandFound = false;
+			            
+			            allIcons.forEach(icon => {
+			                const commands = icon.getAttribute('data-voice-command').toLowerCase().split(',');
+			                
+			                for (let cmd of commands) {
+			                    cmd = cmd.trim();
+			                    if (transcript.includes(cmd)) {
+			                        commandFound = true;
+			                        voiceResult.textContent += ` → Открываю "${icon.querySelector('.button-title').textContent}"`;
+			                        
+			                        // Эмулируем клик по иконке
+			                        setTimeout(() => {
+			                            icon.click();
+			                        }, 1500);
+			                        
+			                        break;
+			                    }
+			                }
+			            });
+			            
+			            if (!commandFound) {
+			                voiceResult.textContent += ' → Команда не распознана';
+			            }
+			            
+			            voiceButton.classList.remove('listening');
+			        };
+			        
+			        recognition.onerror = function(event) {
+			            console.error('Ошибка распознавания:', event.error);
+			            voiceResult.textContent = 'Ошибка: ' + event.error;
+			            voiceButton.classList.remove('listening');
+			            
+			            if (event.error === 'not-allowed') {
+			                voiceResult.textContent = 'Разрешите доступ к микрофону';
+			            }
+			        };
+			        
+			        recognition.onend = function() {
+			            voiceButton.classList.remove('listening');
+			        };
+			        
+			    } else {
+			        // Браузер не поддерживает распознавание речи
+			        voiceButton.disabled = true;
+			        voiceButton.style.opacity = '0.7';
+			        voiceResult.textContent = 'Ваш браузер не поддерживает голосовое управление';
+			        console.error('Браузер не поддерживает SpeechRecognition');
+			    }
+			});
 		</script>
 	</body>
+</html>
 	
 </html>
+
 
 
