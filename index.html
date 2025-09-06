@@ -178,6 +178,8 @@
 			     display: flex;
 			     justify-content: center;
 			     margin: 15px 0;
+			     flex-direction: column;
+			     align-items: center;
 			 }
 			 
 			 #voiceButton {
@@ -205,12 +207,57 @@
 			     animation: pulse 1.5s infinite;
 			 }
 			 
+			 #voiceButton:disabled {
+			     background: #ccc;
+			     cursor: not-allowed;
+			 }
+			 
 			 #voiceResult {
 			     text-align: center;
 			     margin: 10px 0;
 			     min-height: 24px;
 			     color: white;
 			     font-weight: bold;
+			     padding: 8px;
+			     border-radius: 8px;
+			     background: rgba(0, 0, 0, 0.5);
+			     max-width: 80%;
+			 }
+			 
+			 .browser-warning {
+			     color: #ff6b6b;
+			     text-align: center;
+			     margin: 10px 0;
+			     padding: 10px;
+			     background: rgba(255, 255, 255, 0.9);
+			     border-radius: 8px;
+			     max-width: 80%;
+			 }
+			 
+			 /* Стили для быстрых команд */
+			 .quick-commands {
+			     display: flex;
+			     justify-content: center;
+			     flex-wrap: wrap;
+			     gap: 10px;
+			     margin: 15px 0;
+			 }
+			 
+			 .quick-command {
+			     background: linear-gradient(135deg, #6b73ff, #000dff);
+			     border: none;
+			     border-radius: 20px;
+			     padding: 8px 16px;
+			     color: white;
+			     font-size: 14px;
+			     cursor: pointer;
+			     box-shadow: var(--shadow);
+			     transition: all 0.3s;
+			 }
+			 
+			 .quick-command:hover {
+			     transform: translateY(-2px);
+			     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 			 }
 			 
 			 @keyframes pulse {
@@ -224,7 +271,6 @@
 			         max-width: 90%;
 			         flex-direction: column;
 			     }
-
 
 			     .buttons-grid {
 			         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -255,7 +301,6 @@
                                 
 			     }
 
-			     /* Специфичные стили для времени и даты на мобильных */
 			     .time-date-container {
 			         margin: 5px 0 15px;
 			     }
@@ -267,6 +312,15 @@
 			     #date {
 			         font-size: 16px;
                                 
+			     }
+			     
+			     .quick-commands {
+			         gap: 8px;
+			     }
+			     
+			     .quick-command {
+			         padding: 6px 12px;
+			         font-size: 12px;
 			     }
 			 }
 
@@ -287,7 +341,15 @@
 			     .time-date-container {
 			         margin: 5px 0 10px;
 			     }
-                            
+			     
+			     .quick-commands {
+			         gap: 5px;
+			     }
+			     
+			     .quick-command {
+			         padding: 5px 10px;
+			         font-size: 11px;
+			     }
 			 }
 		</style>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -306,13 +368,28 @@
 			<div id="date"></div>
 		</div>
 		
+		<!-- Блок быстрых команд -->
+		<div class="quick-commands">
+			<button class="quick-command" data-command="ашан">Ашан</button>
+			<button class="quick-command" data-command="озон">Озон</button>
+			<button class="quick-command" data-command="дэен">Дзен</button>
+			<button class="quick-command" data-command="вайлдберриз">WB</button>
+			<button class="quick-command" data-command="мос ру">Мос.ру</button>
+			<button class="quick-command" data-command="счетчики">Счетчики</button>
+			<button class="quick-command" data-command="погода">Погода</button>
+			<button class="quick-command" data-command="карты">Карты</button>
+		</div>
+		
 		<!-- Блок голосового управления -->
 		<div class="voice-control">
 			<button id="voiceButton">
 				<i class="fas fa-microphone"></i> Голосовое управление
 			</button>
+			<div id="voiceResult"></div>
+			<div id="browserWarning" class="browser-warning" style="display: none;">
+				Голосовое управление работает только онлайн. Используйте кнопки выше для быстрого доступа!
+			</div>
 		</div>
-		<div id="voiceResult"></div>
 
 		<div class="container">
 			<div class="buttons-grid">
@@ -411,19 +488,72 @@
 			setInterval(updateClock, 1000);
 			setInterval(updateDate, 60000);
 			
+			// Функция для обработки команд
+			function simulateVoiceCommand(command) {
+			    const voiceResult = document.getElementById('voiceResult');
+			    voiceResult.textContent = `Команда: "${command}"`;
+			    
+			    // Ищем подходящую иконку
+			    const allIcons = document.querySelectorAll('[data-voice-command]');
+			    let commandFound = false;
+			    
+			    allIcons.forEach(icon => {
+			        const commands = icon.getAttribute('data-voice-command').toLowerCase().split(',');
+			        
+			        for (let cmd of commands) {
+			            cmd = cmd.trim();
+			            if (command.includes(cmd)) {
+			                commandFound = true;
+			                voiceResult.textContent += ` → Открываю "${icon.querySelector('.button-title').textContent}"`;
+			                
+			                // Анимация выделения
+			                icon.style.transform = 'scale(1.05)';
+			                icon.style.boxShadow = '0 0 20px rgba(0, 150, 255, 0.7)';
+			                
+			                setTimeout(() => {
+			                    icon.style.transform = '';
+			                    icon.style.boxShadow = '';
+			                    icon.click();
+			                }, 1000);
+			                
+			                break;
+			            }
+			        }
+			    });
+			    
+			    if (!commandFound) {
+			        voiceResult.textContent += ' → Команда не распознана';
+			    }
+			}
+			
+			// Обработчик быстрых команд
+			document.querySelectorAll('.quick-command').forEach(button => {
+			    button.addEventListener('click', function() {
+			        const command = this.getAttribute('data-command');
+			        simulateVoiceCommand(command);
+			    });
+			});
+			
 			// Голосовое управление
 			document.addEventListener('DOMContentLoaded', function() {
 			    const voiceButton = document.getElementById('voiceButton');
 			    const voiceResult = document.getElementById('voiceResult');
+			    const browserWarning = document.getElementById('browserWarning');
+			    
+			    // Всегда показываем предупреждение для локального файла
+			    if (window.location.protocol === 'file:') {
+			        browserWarning.style.display = 'block';
+			    }
 			    
 			    // Проверяем поддержку браузером
-			    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+			    if (('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) && 
+			        window.location.protocol !== 'file:') {
+			        
 			        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 			        const recognition = new SpeechRecognition();
 			        
 			        recognition.lang = 'ru-RU';
 			        recognition.continuous = false;
-			        recognition.interimResults = false;
 			        
 			        voiceButton.addEventListener('click', function() {
 			            try {
@@ -431,66 +561,24 @@
 			                voiceButton.classList.add('listening');
 			                voiceResult.textContent = 'Слушаю...';
 			            } catch (error) {
-			                console.error('Ошибка при запуске распознавания:', error);
-			                voiceResult.textContent = 'Ошибка: ' + error.message;
+			                voiceResult.textContent = 'Ошибка доступа к микрофону';
 			            }
 			        });
 			        
 			        recognition.onresult = function(event) {
 			            const transcript = event.results[0][0].transcript.trim().toLowerCase();
-			            voiceResult.textContent = `Вы сказали: "${transcript}"`;
-			            console.log('Распознано:', transcript);
-			            
-			            // Ищем подходящую команду
-			            const allIcons = document.querySelectorAll('[data-voice-command]');
-			            let commandFound = false;
-			            
-			            allIcons.forEach(icon => {
-			                const commands = icon.getAttribute('data-voice-command').toLowerCase().split(',');
-			                
-			                for (let cmd of commands) {
-			                    cmd = cmd.trim();
-			                    if (transcript.includes(cmd)) {
-			                        commandFound = true;
-			                        voiceResult.textContent += ` → Открываю "${icon.querySelector('.button-title').textContent}"`;
-			                        
-			                        // Эмулируем клик по иконке
-			                        setTimeout(() => {
-			                            icon.click();
-			                        }, 1500);
-			                        
-			                        break;
-			                    }
-			                }
-			            });
-			            
-			            if (!commandFound) {
-			                voiceResult.textContent += ' → Команда не распознана';
-			            }
-			            
+			            simulateVoiceCommand(transcript);
 			            voiceButton.classList.remove('listening');
 			        };
 			        
 			        recognition.onerror = function(event) {
-			            console.error('Ошибка распознавания:', event.error);
 			            voiceResult.textContent = 'Ошибка: ' + event.error;
-			            voiceButton.classList.remove('listening');
-			            
-			            if (event.error === 'not-allowed') {
-			                voiceResult.textContent = 'Разрешите доступ к микрофону';
-			            }
-			        };
-			        
-			        recognition.onend = function() {
 			            voiceButton.classList.remove('listening');
 			        };
 			        
 			    } else {
-			        // Браузер не поддерживает распознавание речи
 			        voiceButton.disabled = true;
-			        voiceButton.style.opacity = '0.7';
-			        voiceResult.textContent = 'Ваш браузер не поддерживает голосовое управление';
-			        console.error('Браузер не поддерживает SpeechRecognition');
+			        voiceButton.title = 'Не поддерживается в этом режиме';
 			    }
 			});
 		</script>
@@ -498,6 +586,7 @@
 </html>
 	
 </html>
+
 
 
 
